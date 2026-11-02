@@ -4,6 +4,20 @@
              StartupUri="MainWindow.xaml">
   <Application.Resources>
     <ResourceDictionary>
+      <SolidColorBrush x:Key="BgBrush" Color="#09090B"/>
+      <SolidColorBrush x:Key="PanelBrush" Color="#0C0C0F"/>
+      <SolidColorBrush x:Key="CardBrush" Color="#141417"/>
+      <SolidColorBrush x:Key="CardHoverBrush" Color="#1C1C21"/>
+      <SolidColorBrush x:Key="LineBrush" Color="#26262C"/>
+      <SolidColorBrush x:Key="AccentBrush" Color="#10B981"/>
+      <SolidColorBrush x:Key="AccentHoverBrush" Color="#34D399"/>
+      <SolidColorBrush x:Key="TextBrush" Color="#E4E4E7"/>
+      <SolidColorBrush x:Key="DimBrush" Color="#8B8B93"/>
+      <SolidColorBrush x:Key="DimmerBrush" Color="#5B5B63"/>
+      <SolidColorBrush x:Key="DangerBrush" Color="#EF4444"/>
+      <SolidColorBrush x:Key="WarnBrush" Color="#F59E0B"/>
+      <SolidColorBrush x:Key="InfoBrush" Color="#38BDF8"/>
+
       <!-- ===== converters & effects ===== -->
       <BooleanToVisibilityConverter x:Key="BoolToVis"/>
       <DropShadowEffect x:Key="GlowEffect" Color="#10B981" BlurRadius="34" ShadowDepth="0" Opacity="0.28"/>
@@ -27,20 +41,6 @@
       </Style>
 
       <!-- ===== Dark design language (kept in sync with the original UI) ===== -->
-      <SolidColorBrush x:Key="BgBrush" Color="#09090B"/>
-      <SolidColorBrush x:Key="PanelBrush" Color="#0C0C0F"/>
-      <SolidColorBrush x:Key="CardBrush" Color="#141417"/>
-      <SolidColorBrush x:Key="CardHoverBrush" Color="#1C1C21"/>
-      <SolidColorBrush x:Key="LineBrush" Color="#26262C"/>
-      <SolidColorBrush x:Key="AccentBrush" Color="#10B981"/>
-      <SolidColorBrush x:Key="AccentHoverBrush" Color="#34D399"/>
-      <SolidColorBrush x:Key="TextBrush" Color="#E4E4E7"/>
-      <SolidColorBrush x:Key="DimBrush" Color="#8B8B93"/>
-      <SolidColorBrush x:Key="DimmerBrush" Color="#5B5B63"/>
-      <SolidColorBrush x:Key="DangerBrush" Color="#EF4444"/>
-      <SolidColorBrush x:Key="WarnBrush" Color="#F59E0B"/>
-      <SolidColorBrush x:Key="InfoBrush" Color="#38BDF8"/>
-
       <Style x:Key="SectionTitle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
