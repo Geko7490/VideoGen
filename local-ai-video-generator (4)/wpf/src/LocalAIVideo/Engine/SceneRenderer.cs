@@ -133,7 +133,7 @@ public static class SceneRenderer
         // beam
         if (light.Beam)
         {
-            var beam = new LinearGradientBrush(Palette.AlphaColor(light.Key, .22 * intensity * flick), Colors.Transparent) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+            var beam = new LinearGradientBrush(new GradientStopCollection { new GradientStop(Palette.AlphaColor(light.Key, .22 * intensity * flick), 0), new GradientStop(Colors.Transparent, 1) }) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
             var geo = new PathGeometry();
             var fig = new PathFigure { StartPoint = new Point(o.X, o.Y) };
             fig.Segments.Add(new LineSegment(new Point(o.X - W * .55, H * 1.1), true));
