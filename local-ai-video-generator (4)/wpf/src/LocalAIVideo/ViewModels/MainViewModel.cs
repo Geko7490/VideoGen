@@ -137,8 +137,8 @@ public partial class MainViewModel : ObservableObject
     public RelayCommand NewSeedCommand { get; set; }
     public RelayCommand OpenOutputCommand { get; set; }
     public RelayCommand RefreshHardwareCommand { get; set; }
-    public RelayCommand<SceneRow> SelectSceneCommand { get; set; }
-    public RelayCommand<ProjectRow> OpenProjectCommand { get; set; }
+    public RelayCommand SelectSceneCommand { get; set; }
+    public RelayCommand OpenProjectCommand { get; set; }
     public RelayCommand DeleteProjectCommand { get; set; }
 
     private void WireCommands()
@@ -153,24 +153,24 @@ public partial class MainViewModel : ObservableObject
             if (File.Exists(OutputPath)) System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{OutputPath}\"");
         }, () => File.Exists(OutputPath));
         RefreshHardwareCommand = new RelayCommand(() => Device = Hardware.Detect());
-        SelectSceneCommand = new RelayCommand<SceneRow>(r =>
+        SelectSceneCommand = new RelayCommand(param =>
         {
-            if (r == null) return;
+            if (param is not SceneRow r) return;
             foreach (var s in Scenes) s.IsSelected = false;
             r.IsSelected = true;
             var scene = CurrentScript?.Scenes.FirstOrDefault(x => x.SceneId == r.SceneId);
             if (scene != null) { _previewSpec = scene.Spec; _previewSeed = scene.Seed; _previewT = 0; }
         });
-        OpenProjectCommand = new RelayCommand<ProjectRow>(p =>
+        OpenProjectCommand = new RelayCommand(param =>
         {
-            if (p == null) return;
+            if (param is not ProjectRow p) return;
             var proj = Storage.LoadProject(p.Id);
             if (proj == null) return;
             LoadProjectIntoUi(proj);
         });
-        DeleteProjectCommand = new RelayCommand<ProjectRow>(p =>
+        DeleteProjectCommand = new RelayCommand(param =>
         {
-            if (p == null) return;
+            if (param is not ProjectRow p) return;
             if (System.Windows.MessageBox.Show("Silinsin mi?", "Proje Sil",
                 System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Question) == System.Windows.MessageBoxResult.Yes)
             { Storage.DeleteProject(p.Id); LoadProjects(); }
