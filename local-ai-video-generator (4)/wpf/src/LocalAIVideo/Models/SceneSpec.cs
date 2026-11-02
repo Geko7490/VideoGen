@@ -72,7 +72,7 @@ public enum CharacterMode { auto, none, optional, required }
 
 public class EnvironmentSpec
 {
-    public EnvType Type { get; set; } = EnvType.abstract;
+    public EnvType Type { get; set; } = EnvType.@abstract;
     public TimeOfDay Time { get; set; } = TimeOfDay.day;
     public Weather Weather { get; set; } = Weather.clear;
 }
