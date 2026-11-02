@@ -7,7 +7,7 @@ namespace LocalAIVideo.Models;
 public enum EnvType
 {
     bedroom, living_room, kitchen, office, classroom, hallway, street, city,
-    forest, park, beach, hospital, store, warehouse, basement, cave, rooftop, house, space, abstract
+    forest, park, beach, hospital, store, warehouse, basement, cave, rooftop, house, space, @abstract
 }
 
 public enum TimeOfDay { dawn, day, sunset, night }
@@ -63,7 +63,7 @@ public enum VisualStyle
 
 public enum CharacterKind
 {
-    human, animal, creature, monster, robot, alien, object, vehicle, shadow, abstract
+    human, animal, creature, monster, robot, alien, object, vehicle, shadow, @abstract
 }
 
 public enum CharacterMode { auto, none, optional, required }
