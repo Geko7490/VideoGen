@@ -63,7 +63,7 @@ public enum VisualStyle
 
 public enum CharacterKind
 {
-    human, animal, creature, monster, robot, alien, object, vehicle, shadow, @abstract
+    human, animal, creature, monster, robot, alien, @object, vehicle, shadow, @abstract
 }
 
 public enum CharacterMode { auto, none, optional, required }
