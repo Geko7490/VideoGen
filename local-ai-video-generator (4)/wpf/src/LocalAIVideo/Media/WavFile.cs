@@ -22,11 +22,11 @@ public static class WavFile
         r.ReadUInt32(); // size
         r.ReadChars(4); // WAVE
         int sampleRate = 0, channels = 0;
-        bool fmt = false, data = false;
+        bool fmt = false, hasData = false;
         long dataPos = -1, dataLen = 0;
         while (ms.Position + 8 <= data.Length)
         {
-            string id = r.ReadChars(4);
+            string id = new string(r.ReadChars(4));
             int sz = (int)r.ReadUInt32();
             if (id == "fmt ")
             {
@@ -40,12 +40,12 @@ public static class WavFile
                 if (sz > 16) ms.Position += sz - 16;
                 if (bits != 16) throw new InvalidDataException("Only 16-bit PCM WAV is supported by the mixer.");
             }
-            else if (id == "data") { data = true; dataPos = ms.Position; dataLen = sz; }
+            else if (id == "data") { hasData = true; dataPos = ms.Position; dataLen = sz; }
             else ms.Position += sz;
         }
         if (!fmt) throw new InvalidDataException("Not a PCM WAV file.");
         var w = new Wav { SampleRate = sampleRate, Channels = channels };
-        if (data)
+        if (hasData)
         {
             ms.Position = dataPos;
             int n = (int)(dataLen / 2);
@@ -88,7 +88,7 @@ public static class WavFile
             int pos = 12;
             while (pos + 8 <= block.Length)
             {
-                string id = new string(block, pos, 4);
+                string id = System.Text.Encoding.ASCII.GetString(block, pos, 4);
                 int sz = BitConverter.ToInt32(block, pos + 4);
                 if (id == "fmt ") { sampleRate = BitConverter.ToInt32(block, pos + 12); pos += sz; }
                 else if (id == "data") { return sz / (double)(sampleRate * 2); }
