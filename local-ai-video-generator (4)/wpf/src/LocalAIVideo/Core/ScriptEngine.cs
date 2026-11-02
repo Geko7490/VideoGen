@@ -100,7 +100,7 @@ public class ScriptEngine : IDisposable
             CharacterMode.optional => "Include a character only when the narration needs one.",
             _ => "Use characters only where they help the story; empty-room shots are encouraged.",
         };
-        return $"""
+        return $$"""
 Write a storyboard for a {{durationSec:0}}-second narrated 2D video about: "{{p.Topic}}".
 Cast ids you may use: {{cast}}. {{modeNote}}
 Write {{minS}}-{{maxS}} scenes covering ~{{words:0}} words of narration.
