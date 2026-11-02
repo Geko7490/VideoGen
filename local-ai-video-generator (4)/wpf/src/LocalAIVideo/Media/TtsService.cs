@@ -26,13 +26,19 @@ public class TtsService : IDisposable
     {
         var list = new List<TtsVoice>();
         foreach (var v in _synth.GetInstalledVoices().Where(v => v.Enabled))
-            list.Add(new TtsVoice { Id = v.VoiceInfo.Name, Name = v.VoiceInfo.Culture.DisplayName + " — " + v.VoiceInfo.Name, IsDefault = v.VoiceInfo.Name == _synth.SelectVoiceByHints().Name });
+            list.Add(new TtsVoice { Id = v.VoiceInfo.Name, Name = v.VoiceInfo.Culture.DisplayName + " — " + v.VoiceInfo.Name, IsDefault = v.VoiceInfo.Name == _synth.Voice.Name });
         return list;
     }
 
     public bool SelectVoice(string id)
     {
-        if (string.IsNullOrEmpty(id)) { _synth.SelectDefaultVoice(); SelectedVoiceId = ""; return true; }
+        if (string.IsNullOrEmpty(id))
+        {
+            var defaultVoice = _synth.GetInstalledVoices().FirstOrDefault(v => v.Enabled)?.VoiceInfo.Name;
+            if (!string.IsNullOrEmpty(defaultVoice)) _synth.SelectVoice(defaultVoice);
+            SelectedVoiceId = "";
+            return true;
+        }
         try { _synth.SelectVoice(id); SelectedVoiceId = id; return true; }
         catch { return false; }
     }
