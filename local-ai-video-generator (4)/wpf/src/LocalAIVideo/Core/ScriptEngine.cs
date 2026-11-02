@@ -230,7 +230,7 @@ Return ONLY JSON of this shape:
             if (el.TryGetProperty("camera", out var cam))
             {
                 scene.Spec.Camera.Shot = ParseEnum<ShotType>(cam.TryGetProperty("shot", out var cs2) ? cs2.GetString() : null, i == 0 ? ShotType.establishing : ShotType.medium);
-                var mv = ParseEnum<CameraMove>(cam.TryGetProperty("movement", out var cm2) ? cm2.GetString() : null, CameraMove.static);
+                var mv = ParseEnum<CameraMove>(cam.TryGetProperty("movement", out var cm2) ? cm2.GetString() : null, CameraMove.@static);
                 // avoid repeating the same movement 3x in a row
                 if (lastMoves.Count >= 2 && lastMoves[^1] == mv.ToString() && lastMoves[^2] == mv.ToString())
                     mv = new[] { CameraMove.slow_zoom_in, CameraMove.pan_right, CameraMove.slow_zoom_out, CameraMove.pan_left, CameraMove.handheld }[i % 5];
