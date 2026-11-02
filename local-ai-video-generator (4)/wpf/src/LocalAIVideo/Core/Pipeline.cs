@@ -98,7 +98,7 @@ public class Pipeline : IDisposable
                 sc.WordTimings = timings;
                 starts.Add(cursor);
                 narration.Add((cursor, path));
-                cursor += sc.ActualDuration;
+                cursor += sc.ActualDuration ?? sc.DurationEstimate;
             }
             catch (Exception e)
             {
@@ -130,7 +130,7 @@ public class Pipeline : IDisposable
 
         // ---- 4) frame-by-frame encode ----
         RaiseProg(0.66, "Render");
-        var (w, h) = (int)p.AspectRatio switch
+        var (w, h) = p.AspectRatio switch
         {
             AspectRatio.Portrait916 => (720, 1280),
             AspectRatio.Landscape169 => (1280, 720),
@@ -174,7 +174,7 @@ public class Pipeline : IDisposable
             < 60 => (c, x, 0), < 120 => (x, c, 0), < 180 => (0, c, x),
             < 240 => (0, x, c), < 300 => (x, 0, c), _ => (c, 0, x),
         };
-        return "#" + (int)Math.Round((r + m) * 255).ToString("X2") + (int)Math.Round((g + m) * 255).ToString("X2") + (int)Math.Round((b + m) * 255).ToString("X2");
+        return "#" + ((int)Math.Round((r + m) * 255)).ToString("X2") + ((int)Math.Round((g + m) * 255)).ToString("X2") + ((int)Math.Round((b + m) * 255)).ToString("X2");
     }
 }
 
@@ -251,9 +251,9 @@ public static class CaptionRenderer
         int i = 0;
         while (i < words.Count && words[i].End < t) i++;
         if (i >= words.Count) return;
-        var phrase = words.Skip(i).Take(4).Select(w => w.Word).Join(" ");
+        var phrase = string.Join(" ", words.Skip(i).Take(4).Select(w => w.Word));
 
-        var typeface = new System.Windows.Media.Typeface("Segoe UI",
+        var typeface = new System.Windows.Media.Typeface(new System.Windows.Media.FontFamily("Segoe UI"),
             System.Windows.FontStyles.Normal, System.Windows.FontWeights.SemiBold, System.Windows.FontStretches.Normal);
         var ft = new System.Windows.Media.FormattedText(phrase, System.Globalization.CultureInfo.InvariantCulture,
             System.Windows.FlowDirection.LeftToRight, typeface, H * .045, System.Windows.Media.Brushes.White, 1.0);
