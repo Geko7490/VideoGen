@@ -185,7 +185,9 @@ public static class EffectsRenderer
             double phase = (t * speed + r.NextDouble()) % 1.4 - .2;
             double x = phase * W * 1.3;
             double wdt = W * (.18 + r.NextDouble() * .22);
-            var g = Palette.Linear(Colors.Transparent, Palette.AlphaColor(Colors.Black, .3 + r.NextDouble() * .2), Colors.Transparent) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 0) };
+            var g = Palette.Linear(Colors.Transparent, Palette.AlphaColor(Colors.Black, .3 + r.NextDouble() * .2), Colors.Transparent);
+            g.StartPoint = new Point(0, 0);
+            g.EndPoint = new Point(1, 0);
             dc.DrawRectangle(g, null, new Rect(x - wdt, 0, wdt * 2, H));
         }
     }
