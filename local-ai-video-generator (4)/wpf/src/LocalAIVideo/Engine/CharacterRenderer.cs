@@ -532,13 +532,19 @@ public static class CharacterRenderer
 
     private static Brush RadialGradient(Color c, double r)
     {
-        var g = Palette.Radial(Palette.Shade(c, .22), Palette.Shade(c, -.18)) { GradientOrigin = new Point(-.3, -.3), Center = new Point(0, 0), RadiusX = r * 1.2, RadiusY = r * 1.2 };
+        var g = Palette.Radial(Palette.Shade(c, .22), Palette.Shade(c, -.18));
+        g.GradientOrigin = new Point(-.3, -.3);
+        g.Center = new Point(0, 0);
+        g.RadiusX = r * 1.2;
+        g.RadiusY = r * 1.2;
         return g;
     }
 
     private static Brush VerticalGradient(Color c, Point p, double w)
     {
-        var g = Palette.Linear(Palette.Shade(c, -.22), Palette.Shade(c, .12)) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 0) };
+        var g = Palette.Linear(Palette.Shade(c, -.22), Palette.Shade(c, .12));
+        g.StartPoint = new Point(0, 0);
+        g.EndPoint = new Point(1, 0);
         return g;
     }
 }
