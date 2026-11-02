@@ -267,7 +267,7 @@ public static class CharacterRenderer
             Emotion.scared => new FaceParams(1.45, -.3, .009, -.3, .6, Sweat: true),
             Emotion.surprised => new FaceParams(1.55, 0, .013, 0, .78),
             Emotion.confused => new FaceParams(1.0, .3, .006, -.2, .1, Sweat: true),
-            Emotion.worried => new FaceParams(.95, -.3, .003, -.45, .08, sweat: true),
+            Emotion.worried => new FaceParams(.95, -.3, .003, -.45, .08, Sweat: true),
             Emotion.shocked => new FaceParams(1.75, -.1, .016, -.1, .95, sweat: true),
             Emotion.evil => new FaceParams(.72, .75, -.008, .85, .22, Glow: true),
             Emotion.tired => new FaceParams(.32, -.18, -.004, -.3, .12),
