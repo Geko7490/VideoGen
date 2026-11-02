@@ -106,7 +106,7 @@ public class Pipeline : IDisposable
                 sc.TtsError = e.Message;
                 sc.ActualDuration = Math.Max(1.5, sc.DurationEstimate); // silent fallback, video still renders
                 starts.Add(cursor);
-                cursor += sc.ActualDuration;
+                cursor += sc.ActualDuration ?? sc.DurationEstimate;
                 Error?.Invoke($"Scene {i + 1} TTS failed: {e.Message}");
             }
             sc.TtsStatus = sc.TtsStatus == TtsStatus.failed ? TtsStatus.failed : TtsStatus.done;
@@ -171,8 +171,8 @@ public class Pipeline : IDisposable
         double m = l / 100.0 - c / 2;
         (double r, double g, double b) = h switch
         {
-            < 60 => (c, x, 0), < 120 => (x, c, 0), < 180 => (0, c, x),
-            < 240 => (0, x, c), < 300 => (x, 0, c), _ => (c, 0, x),
+            < 60 => (c, x, 0d), < 120 => (x, c, 0d), < 180 => (0d, c, x),
+            < 240 => (0d, x, c), < 300 => (x, 0d, c), _ => (c, 0d, x),
         };
         return "#" + ((int)Math.Round((r + m) * 255)).ToString("X2") + ((int)Math.Round((g + m) * 255)).ToString("X2") + ((int)Math.Round((b + m) * 255)).ToString("X2");
     }
