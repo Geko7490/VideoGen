@@ -74,7 +74,7 @@ public static class VideoEncoder
                 double t = i / (double)fps;
                 var dv = frameProvider(t);
                 rtb.Render(dv);
-                rtb.CopyPixels(buffer, stride);
+                rtb.CopyPixels(buffer, stride, 0);
                 stdin.Write(buffer, 0, buffer.Length);
                 if ((i & 3) == 0) onProgress?.Invoke((i + 1) / (double)totalFrames);
             }
