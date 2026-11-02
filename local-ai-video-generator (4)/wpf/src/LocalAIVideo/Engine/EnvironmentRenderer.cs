@@ -44,7 +44,9 @@ public static class EnvironmentRenderer
                 break;
 
             case EnvType.@abstract:
-                var bg = Palette.Linear(Palette.Styled(Palette.C(bible.Sky), st), Palette.Styled(Palette.C(bible.Primary), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 1) };
+                var bg = Palette.Linear(Palette.Styled(Palette.C(bible.Sky), st), Palette.Styled(Palette.C(bible.Primary), st));
+                bg.StartPoint = new Point(0, 0);
+                bg.EndPoint = new Point(1, 1);
                 dc.DrawRectangle(bg, null, new Rect(-W, -H, W * 3, H * 3));
                 var r2 = new Random(seed);
                 for (int i = 0; i < 14; i++)
