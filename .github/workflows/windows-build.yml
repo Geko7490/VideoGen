@@ -19,3 +19,13 @@ jobs:
 
       - name: Build solution
         run: dotnet build "local-ai-video-generator (4)/wpf/LocalAIVideo.sln" --configuration Release
+
+      - name: Publish self-contained Windows app
+        run: dotnet publish "local-ai-video-generator (4)/wpf/src/LocalAIVideo/LocalAIVideo.csproj" --configuration Release --runtime win-x64 --self-contained true --output "${{ github.workspace }}/publish/LocalAIVideo"
+
+      - name: Upload Windows app
+        uses: actions/upload-artifact@v4
+        with:
+          name: LocalAIVideo-Windows-x64
+          path: publish/LocalAIVideo/
+          if-no-files-found: error
