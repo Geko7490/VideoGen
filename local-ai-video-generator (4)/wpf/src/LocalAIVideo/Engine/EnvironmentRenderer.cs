@@ -80,9 +80,9 @@ public static class EnvironmentRenderer
                     dc.DrawRectangle(sky, null, new Rect(-W, -H, W * 3, H * 3));
                     if (spec.Environment.Time == TimeOfDay.night)
                     {
-                        var starsRandom = new Random(seed);
+                        var nightStarsRandom = new Random(seed);
                         for (int i = 0; i < 70; i++)
-                            dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + starsRandom.NextDouble() * .7), null, new Point(starsRandom.NextDouble() * W * 1.6 - W * .3, starsRandom.NextDouble() * H * .6), .4 + starsRandom.NextDouble(), .4 + starsRandom.NextDouble());
+                            dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + nightStarsRandom.NextDouble() * .7), null, new Point(nightStarsRandom.NextDouble() * W * 1.6 - W * .3, nightStarsRandom.NextDouble() * H * .6), .4 + nightStarsRandom.NextDouble(), .4 + nightStarsRandom.NextDouble());
                         dc.DrawEllipse(Palette.Alpha(Palette.C("#f2f6ff"), .95), null, new Point(W * .76, H * .16), W * .05, W * .05);
                     }
                     // distant silhouettes
