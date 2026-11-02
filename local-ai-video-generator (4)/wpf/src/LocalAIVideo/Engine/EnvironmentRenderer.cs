@@ -43,7 +43,7 @@ public static class EnvironmentRenderer
                 dc.DrawEllipse(pg, null, new Point(W * .22, H * .68), W * .26, W * .26);
                 break;
 
-            case EnvType.abstract:
+            case EnvType.@abstract:
                 var bg = new LinearGradientBrush(Palette.Styled(Palette.C(bible.Sky), st), Palette.Styled(Palette.C(bible.Primary), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 1) };
                 dc.DrawRectangle(bg, null, new Rect(-W, -H, W * 3, H * 3));
                 var r2 = new Random(seed);
