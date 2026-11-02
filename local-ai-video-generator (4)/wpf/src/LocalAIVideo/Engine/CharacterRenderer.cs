@@ -266,12 +266,12 @@ public static class CharacterRenderer
             Emotion.angry => new FaceParams(.95, .65, -.006, -.55, .18),
             Emotion.scared => new FaceParams(1.45, -.3, .009, -.3, .6, Sweat: true),
             Emotion.surprised => new FaceParams(1.55, 0, .013, 0, .78),
-            Emotion.confused => new FaceParams(1.0, .3, .006, -.2, .1, sweat: true),
+            Emotion.confused => new FaceParams(1.0, .3, .006, -.2, .1, Sweat: true),
             Emotion.worried => new FaceParams(.95, -.3, .003, -.45, .08, sweat: true),
             Emotion.shocked => new FaceParams(1.75, -.1, .016, -.1, .95, sweat: true),
             Emotion.evil => new FaceParams(.72, .75, -.008, .85, .22, Glow: true),
             Emotion.tired => new FaceParams(.32, -.18, -.004, -.3, .12),
-            Emotion.excited => new FaceParams(1.25, .12, .009, .95, .52, blush: true),
+            Emotion.excited => new FaceParams(1.25, .12, .009, .95, .52, Blush: true),
             _ => new FaceParams(1, 0, 0, .05, .06)
         };
 
