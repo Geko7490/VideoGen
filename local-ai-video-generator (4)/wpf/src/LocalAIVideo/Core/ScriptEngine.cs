@@ -101,30 +101,30 @@ public class ScriptEngine : IDisposable
             _ => "Use characters only where they help the story; empty-room shots are encouraged.",
         };
         return $"""
-Write a storyboard for a {durationSec:0}-second narrated 2D video about: "{p.Topic}".
-Cast ids you may use: {cast}. {modeNote}
-Write {minS}-{maxS} scenes covering ~{words:0} words of narration.
+Write a storyboard for a {{durationSec:0}}-second narrated 2D video about: "{{p.Topic}}".
+Cast ids you may use: {{cast}}. {{modeNote}}
+Write {{minS}}-{{maxS}} scenes covering ~{{words:0}} words of narration.
 
 Return ONLY JSON of this shape:
-{{
+{
   "title": "string",
   "hook": "first spoken sentence",
   "music_mood": "e.g. dark ambient",
   "scenes": [
-    {{
+    {
       "duration": 5.5,
       "voiceover": "the sentence spoken in this scene",
       "visual_note": "short note on what we see",
-      "environment": {{ "type": "bedroom|living_room|office|street|city|forest|park|beach|cave|space|abstract|...", "time": "dawn|day|sunset|night", "weather": "clear|rain|snow|fog|storm|wind" }},
-      "lighting": {{ "style": "daylight|night|moonlight|warm|cold|sunset|neon|flashlight|dark|horror|dramatic", "direction": "left|right|top|window|front|back", "intensity": 0.6 }},
-      "characters": [ {{ "id": "character_01", "emotion": "neutral|happy|sad|angry|scared|confused|surprised|worried|shocked|evil|tired|excited", "actions": ["idle","walk","talk","react"], "position": "far_left|left|center|right|far_right", "facing_left": false }} ],
-      "objects": [ {{ "type": "chair|table|bed|window|lamp|door|tree|streetlight|car|box", "position": "left|center|right|character_hand|foreground|background", "state": "default|on|off|open|closed|vibrating", "scale": 1.0 }} ],
+      "environment": { "type": "bedroom|living_room|office|street|city|forest|park|beach|cave|space|abstract|...", "time": "dawn|day|sunset|night", "weather": "clear|rain|snow|fog|storm|wind" },
+      "lighting": { "style": "daylight|night|moonlight|warm|cold|sunset|neon|flashlight|dark|horror|dramatic", "direction": "left|right|top|window|front|back", "intensity": 0.6 },
+      "characters": [ { "id": "character_01", "emotion": "neutral|happy|sad|angry|scared|confused|surprised|worried|shocked|evil|tired|excited", "actions": ["idle","walk","talk","react"], "position": "far_left|left|center|right|far_right", "facing_left": false } ],
+      "objects": [ { "type": "chair|table|bed|window|lamp|door|tree|streetlight|car|box", "position": "left|center|right|character_hand|foreground|background", "state": "default|on|off|open|closed|vibrating", "scale": 1.0 } ],
       "effects": ["rain","snow","fog","dust","lightning","particles"],
-      "camera": {{ "shot": "wide|establishing|medium|close_up|extreme_close_up|pov|low_angle|high_angle|top_down|over_shoulder|side_view", "movement": "static|slow_zoom_in|slow_zoom_out|pan_left|pan_right|tilt_up|tilt_down|tracking|orbit|handheld|shake", "target": "character_01 or object id or null" }},
+      "camera": { "shot": "wide|establishing|medium|close_up|extreme_close_up|pov|low_angle|high_angle|top_down|over_shoulder|side_view", "movement": "static|slow_zoom_in|slow_zoom_out|pan_left|pan_right|tilt_up|tilt_down|tracking|orbit|handheld|shake", "target": "character_01 or object id or null" },
       "transition": "crossfade|fade|fade_black|blur|cut"
-    }}
+    }
   ]
-}}
+}
 """;
     }
 
@@ -146,7 +146,7 @@ Return ONLY JSON of this shape:
         };
 
         var sceneArr = root.TryGetProperty("scenes", out var s) ? s.EnumerateArray().ToList() : new List<JsonElement>();
-        var allowed = new[] { EnvType.bedroom, EnvType.office, EnvType.street, EnvType.city, EnvType.forest, EnvType.park, EnvType.beach, EnvType.cave, EnvType.space, EnvType.abstract, EnvType.living_room, EnvType.kitchen, EnvType.classroom, EnvType.hospital, EnvType.store, EnvType.warehouse, EnvType.hallway, EnvType.basement, EnvType.rooftop, EnvType.house };
+        var allowed = new[] { EnvType.bedroom, EnvType.office, EnvType.street, EnvType.city, EnvType.forest, EnvType.park, EnvType.beach, EnvType.cave, EnvType.space, EnvType.@abstract, EnvType.living_room, EnvType.kitchen, EnvType.classroom, EnvType.hospital, EnvType.store, EnvType.warehouse, EnvType.hallway, EnvType.basement, EnvType.rooftop, EnvType.house };
         var envNames = Enum.GetNames<EnvType>().ToHashSet();
         string lastEnv = "";
         var lastMoves = new List<string>();
@@ -282,7 +282,7 @@ Return ONLY JSON of this shape:
         if (t.Contains("rooftop") || t.Contains("roof")) return EnvType.rooftop;
         if (t.Contains("house") || t.Contains("home")) return EnvType.house;
         if (t.Contains("living room") || t.Contains("sofa") || t.Contains("couch")) return EnvType.living_room;
-        return EnvType.abstract;
+        return EnvType.@abstract;
     }
 
     private static Emotion GuessEmotion(string text)
