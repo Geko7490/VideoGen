@@ -49,7 +49,7 @@ public enum ShotType
 
 public enum CameraMove
 {
-    static, slow_zoom_in, slow_zoom_out, pan_left, pan_right,
+    @static, slow_zoom_in, slow_zoom_out, pan_left, pan_right,
     tilt_up, tilt_down, tracking, orbit, handheld, shake
 }
 
@@ -114,7 +114,7 @@ public class Interaction
 public class CameraSpec
 {
     public ShotType Shot { get; set; } = ShotType.medium;
-    public CameraMove Movement { get; set; } = CameraMove.static;
+    public CameraMove Movement { get; set; } = CameraMove.@static;
     public string? Target { get; set; }
 }
 
