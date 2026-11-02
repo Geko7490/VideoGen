@@ -101,13 +101,13 @@ public static class SceneRenderer
         // ---- bloom / grain ----
         if (st.Bloom > 0 && quality != EngineQuality.low)
         {
-            var g = new RadialGradientBrush(Palette.AlphaColor(Palette.C(bible.Primary), st.Bloom * .25), Colors.Transparent);
+            var g = Palette.Radial(Palette.AlphaColor(Palette.C(bible.Primary), st.Bloom * .25), Colors.Transparent);
             dc.DrawRectangle(g, null, new Rect(0, 0, W, H));
         }
         DrawGrain(dc, W, H, st.Grain, t, quality);
     }
 
-    private static void Push(DrawingContext dc, Matrix m) => dc.PushTransform(m);
+    private static void Push(DrawingContext dc, Matrix m) => dc.PushTransform(new MatrixTransform(m));
 
     private static double PosX(ScreenPos p) => p switch
     {
