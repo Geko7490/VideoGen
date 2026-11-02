@@ -39,7 +39,8 @@ public static class EnvironmentRenderer
                 }
                 var neb = Palette.Radial(Palette.AlphaColor(Palette.C(bible.Primary), .32), Colors.Transparent);
                 dc.DrawRectangle(neb, null, new Rect(-W, -H, W * 3, H * 3));
-                var pg = Palette.Radial(Palette.Styled(Palette.C(bible.Secondary), st), Palette.C("#0b1020")) { GradientOrigin = new Point(-.3, -.3) };
+                var pg = Palette.Radial(Palette.Styled(Palette.C(bible.Secondary), st), Palette.C("#0b1020"));
+                pg.GradientOrigin = new Point(-.3, -.3);
                 dc.DrawEllipse(pg, null, new Point(W * .22, H * .68), W * .26, W * .26);
                 break;
 
@@ -73,7 +74,9 @@ public static class EnvironmentRenderer
                 else
                 {
                     var (top, bot) = Palette.Sky[spec.Environment.Time];
-                    var sky = Palette.Linear(Palette.Styled(top, st), Palette.Styled(bot, st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+                    var sky = Palette.Linear(Palette.Styled(top, st), Palette.Styled(bot, st));
+                    sky.StartPoint = new Point(0, 0);
+                    sky.EndPoint = new Point(0, 1);
                     dc.DrawRectangle(sky, null, new Rect(-W, -H, W * 3, H * 3));
                     if (spec.Environment.Time == TimeOfDay.night)
                     {
@@ -118,9 +121,13 @@ public static class EnvironmentRenderer
             var (wallHex, floorHex) = Room.TryGetValue(spec.Environment.Type, out var c) ? c : ("#cbc7bd", "#8a8279");
             var wc = Palette.Styled(Palette.C(night ? "#2b3350" : wallHex), st);
             var wc2 = Palette.Styled(Palette.C(floorHex), st);
-            var wall = Palette.Linear(Palette.Shade(wc, -.12), Palette.Shade(wc, .06)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+            var wall = Palette.Linear(Palette.Shade(wc, -.12), Palette.Shade(wc, .06));
+            wall.StartPoint = new Point(0, 0);
+            wall.EndPoint = new Point(0, 1);
             dc.DrawRectangle(wall, null, new Rect(-W, -H, W * 3, horizon + H * .5));
-            var floor = Palette.Linear(Palette.Shade(wc2, -.18), Palette.Shade(wc2, .1)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+            var floor = Palette.Linear(Palette.Shade(wc2, -.18), Palette.Shade(wc2, .1));
+            floor.StartPoint = new Point(0, 0);
+            floor.EndPoint = new Point(0, 1);
             dc.DrawRectangle(floor, null, new Rect(-W, horizon, W * 3, H));
             dc.DrawRectangle(Palette.Brush(Palette.Shade(wc, -.34)), null, new Rect(-W, horizon - H * .016, W * 3, H * .016));
             if (detail > .5)
@@ -168,9 +175,13 @@ public static class EnvironmentRenderer
                     break;
 
                 case EnvType.beach:
-                    var sea = Palette.Linear(Palette.Styled(Palette.C("#1b6ca8"), st), Palette.Styled(Palette.C("#2a9d8f"), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+                    var sea = Palette.Linear(Palette.Styled(Palette.C("#1b6ca8"), st), Palette.Styled(Palette.C("#2a9d8f"), st));
+                    sea.StartPoint = new Point(0, 0);
+                    sea.EndPoint = new Point(0, 1);
                     dc.DrawRectangle(sea, null, new Rect(-W, horizon - H * .22, W * 3, H * .27));
-                    var sand = Palette.Linear(Palette.Styled(Palette.C("#e8d2a0"), st), Palette.Styled(Palette.C("#c9ad79"), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+                    var sand = Palette.Linear(Palette.Styled(Palette.C("#e8d2a0"), st), Palette.Styled(Palette.C("#c9ad79"), st));
+                    sand.StartPoint = new Point(0, 0);
+                    sand.EndPoint = new Point(0, 1);
                     dc.DrawRectangle(sand, null, new Rect(-W, horizon, W * 3, H));
                     break;
 
