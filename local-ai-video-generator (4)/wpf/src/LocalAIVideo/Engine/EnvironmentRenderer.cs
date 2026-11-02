@@ -34,12 +34,12 @@ public static class EnvironmentRenderer
                 var starsRandom = new Random(seed);
                 for (int i = 0; i < 120; i++)
                 {
-                    dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + r.NextDouble() * .75), null,
-                        new Point(r.NextDouble() * W * 1.6 - W * .3, r.NextDouble() * H * .62), .4 + r.NextDouble() * 1.6, .4 + r.NextDouble() * 1.6);
+                    dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + starsRandom.NextDouble() * .75), null,
+                        new Point(starsRandom.NextDouble() * W * 1.6 - W * .3, starsRandom.NextDouble() * H * .62), .4 + starsRandom.NextDouble() * 1.6, .4 + starsRandom.NextDouble() * 1.6);
                 }
                 var neb = Palette.Radial(Palette.AlphaColor(Palette.C(bible.Primary), .32), Colors.Transparent);
                 dc.DrawRectangle(neb, null, new Rect(-W, -H, W * 3, H * 3));
-                var pg = new RadialGradientBrush(Palette.Styled(Palette.C(bible.Secondary), st), Palette.C("#0b1020")) { GradientOrigin = new Point(-.3, -.3) };
+                var pg = Palette.Radial(Palette.Styled(Palette.C(bible.Secondary), st), Palette.C("#0b1020")) { GradientOrigin = new Point(-.3, -.3) };
                 dc.DrawEllipse(pg, null, new Point(W * .22, H * .68), W * .26, W * .26);
                 break;
 
@@ -52,7 +52,7 @@ public static class EnvironmentRenderer
                 for (int i = 0; i < 14; i++)
                 {
                     var c = i % 2 == 0 ? Palette.C(bible.Accent) : Palette.C(bible.Secondary);
-                    var g = new RadialGradientBrush(Palette.AlphaColor(c, .22), Colors.Transparent);
+                    var g = Palette.Radial(Palette.AlphaColor(c, .22), Colors.Transparent);
                     double x = r2.NextDouble() * W, y = r2.NextDouble() * H, rad = W * (.08 + r2.NextDouble() * .3);
                     dc.DrawEllipse(g, null, new Point(x, y), rad, rad);
                 }
@@ -73,13 +73,13 @@ public static class EnvironmentRenderer
                 else
                 {
                     var (top, bot) = Palette.Sky[spec.Environment.Time];
-                    var sky = new LinearGradientBrush(Palette.Styled(top, st), Palette.Styled(bot, st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+                    var sky = Palette.Linear(Palette.Styled(top, st), Palette.Styled(bot, st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
                     dc.DrawRectangle(sky, null, new Rect(-W, -H, W * 3, H * 3));
                     if (spec.Environment.Time == TimeOfDay.night)
                     {
-                        var r = new Random(seed);
+                        var starsRandom = new Random(seed);
                         for (int i = 0; i < 70; i++)
-                            dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + starsRandom.NextDouble() * .7), null, new Point(starsRandom.NextDouble() * W * 1.6 - W * .3, starsRandom.NextDouble() * H * .6), .4 + r.NextDouble(), .4 + r.NextDouble());
+                            dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + starsRandom.NextDouble() * .7), null, new Point(starsRandom.NextDouble() * W * 1.6 - W * .3, starsRandom.NextDouble() * H * .6), .4 + starsRandom.NextDouble(), .4 + starsRandom.NextDouble());
                         dc.DrawEllipse(Palette.Alpha(Palette.C("#f2f6ff"), .95), null, new Point(W * .76, H * .16), W * .05, W * .05);
                     }
                     // distant silhouettes
@@ -118,9 +118,9 @@ public static class EnvironmentRenderer
             var (wallHex, floorHex) = Room.TryGetValue(spec.Environment.Type, out var c) ? c : ("#cbc7bd", "#8a8279");
             var wc = Palette.Styled(Palette.C(night ? "#2b3350" : wallHex), st);
             var wc2 = Palette.Styled(Palette.C(floorHex), st);
-            var wall = new LinearGradientBrush(Palette.Shade(wc, -.12), Palette.Shade(wc, .06)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+            var wall = Palette.Linear(Palette.Shade(wc, -.12), Palette.Shade(wc, .06)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
             dc.DrawRectangle(wall, null, new Rect(-W, -H, W * 3, horizon + H * .5));
-            var floor = new LinearGradientBrush(Palette.Shade(wc2, -.18), Palette.Shade(wc2, .1)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+            var floor = Palette.Linear(Palette.Shade(wc2, -.18), Palette.Shade(wc2, .1)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
             dc.DrawRectangle(floor, null, new Rect(-W, horizon, W * 3, H));
             dc.DrawRectangle(Palette.Brush(Palette.Shade(wc, -.34)), null, new Rect(-W, horizon - H * .016, W * 3, H * .016));
             if (detail > .5)
@@ -168,9 +168,9 @@ public static class EnvironmentRenderer
                     break;
 
                 case EnvType.beach:
-                    var sea = new LinearGradientBrush(Palette.Styled(Palette.C("#1b6ca8"), st), Palette.Styled(Palette.C("#2a9d8f"), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+                    var sea = Palette.Linear(Palette.Styled(Palette.C("#1b6ca8"), st), Palette.Styled(Palette.C("#2a9d8f"), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
                     dc.DrawRectangle(sea, null, new Rect(-W, horizon - H * .22, W * 3, H * .27));
-                    var sand = new LinearGradientBrush(Palette.Styled(Palette.C("#e8d2a0"), st), Palette.Styled(Palette.C("#c9ad79"), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
+                    var sand = Palette.Linear(Palette.Styled(Palette.C("#e8d2a0"), st), Palette.Styled(Palette.C("#c9ad79"), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(0, 1) };
                     dc.DrawRectangle(sand, null, new Rect(-W, horizon, W * 3, H));
                     break;
 
