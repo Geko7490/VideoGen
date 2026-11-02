@@ -124,6 +124,7 @@ Return ONLY JSON of this shape:
       "transition": "crossfade|fade|fade_black|blur|cut"
     }
   ]
+    public void Dispose() => _http.Dispose();
 }
 """;
     }
