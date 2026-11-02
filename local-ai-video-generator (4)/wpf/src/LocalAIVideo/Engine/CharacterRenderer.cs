@@ -146,7 +146,7 @@ public static class CharacterRenderer
         var skin = Palette.Styled(Palette.C(def.Skin), st);
         var top = Palette.Styled(Palette.C(def.TopColor), st);
         var bottom = Palette.Styled(Palette.C(def.BottomColor), st);
-        var shoe = Palette.Styled(Palette.C(def.ShoColorSafe()), st);
+        var shoe = Palette.Styled(Palette.C(def.ShoeColorSafe()), st);
         var hair = Palette.Styled(Palette.C(def.HairColor), st);
         double lw = U * .001;
 
@@ -161,7 +161,7 @@ public static class CharacterRenderer
         Shoe(dc, P(sk.FoL), Palette.Shade(shoe, -.2), U, pen);
 
         // torso
-        var hipP = P(sk.Hip), chestP = P(sk.Chest), neckP = P(sk.Neck);
+        var hipP = P(sk.Hip); var chestP = P(sk.Chest); var neckP = P(sk.Neck);
         var torso = new PathGeometry();
         var fig = new PathFigure { StartPoint = new Point(hipP.X - torsoW * .42, hipP.Y) };
         fig.Segments.Add(new QuadraticBezierSegment(new Point(chestP.X - torsoW * .56, chestP.Y), new Point(neckP.X - torsoW * .3, neckP.Y), true));
@@ -261,15 +261,15 @@ public static class CharacterRenderer
 
         var f = emotion switch
         {
-            Emotion.happy => new FaceParams(.62, .1, .004, 1, .3, blush: true),
-            Emotion.sad => new FaceParams(.82, -.42, -.001, -.85, .08, tear: true),
+            Emotion.happy => new FaceParams(.62, .1, .004, 1, .3, Blush: true),
+            Emotion.sad => new FaceParams(.82, -.42, -.001, -.85, .08, Tear: true),
             Emotion.angry => new FaceParams(.95, .65, -.006, -.55, .18),
-            Emotion.scared => new FaceParams(1.45, -.3, .009, -.3, .6, sweat: true),
+            Emotion.scared => new FaceParams(1.45, -.3, .009, -.3, .6, Sweat: true),
             Emotion.surprised => new FaceParams(1.55, 0, .013, 0, .78),
             Emotion.confused => new FaceParams(1.0, .3, .006, -.2, .1, sweat: true),
             Emotion.worried => new FaceParams(.95, -.3, .003, -.45, .08, sweat: true),
             Emotion.shocked => new FaceParams(1.75, -.1, .016, -.1, .95, sweat: true),
-            Emotion.evil => new FaceParams(.72, .75, -.008, .85, .22, glow: true),
+            Emotion.evil => new FaceParams(.72, .75, -.008, .85, .22, Glow: true),
             Emotion.tired => new FaceParams(.32, -.18, -.004, -.3, .12),
             Emotion.excited => new FaceParams(1.25, .12, .009, .95, .52, blush: true),
             _ => new FaceParams(1, 0, 0, .05, .06)
@@ -279,7 +279,7 @@ public static class CharacterRenderer
         for (int side = -1; side <= 1; side += 2)
         {
             double x = side * ex + flip * hr * .04;
-            dc.DrawEllipse(Colors.White, null, new Point(x, ey), hr * .15, hr * .17 * open);
+            dc.DrawEllipse(Palette.Brush(Colors.White), null, new Point(x, ey), hr * .15, hr * .17 * open);
             var pupil = f.Glow ? Palette.C("#ff4d4d") : ink;
             dc.DrawEllipse(Palette.Brush(pupil), null, new Point(x + flip * hr * .03, ey + hr * .01), hr * .075, hr * .095 * Math.Max(.2, open));
             if (open > .5 && !f.Glow)
@@ -532,13 +532,13 @@ public static class CharacterRenderer
 
     private static Brush RadialGradient(Color c, double r)
     {
-        var g = new RadialGradientBrush(Palette.Shade(c, .22), Palette.Shade(c, -.18)) { GradientOrigin = new Point(-.3, -.3), Center = new Point(0, 0), RadiusX = r * 1.2, RadiusY = r * 1.2 };
+        var g = Palette.Radial(Palette.Shade(c, .22), Palette.Shade(c, -.18)) { GradientOrigin = new Point(-.3, -.3), Center = new Point(0, 0), RadiusX = r * 1.2, RadiusY = r * 1.2 };
         return g;
     }
 
     private static Brush VerticalGradient(Color c, Point p, double w)
     {
-        var g = new LinearGradientBrush(Palette.Shade(c, -.22), Palette.Shade(c, .12)) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 0) };
+        var g = Palette.Linear(Palette.Shade(c, -.22), Palette.Shade(c, .12)) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 0) };
         return g;
     }
 }
@@ -546,5 +546,5 @@ public static class CharacterRenderer
 // small helper to avoid referencing a property that doesn't exist
 public static class CharacterDefExt
 {
-    public static string ShooColorSafe(this CharacterDef d) => d.ShoColor ?? "#212529";
+    public static string ShoeColorSafe(this CharacterDef d) => d.ShoeColor ?? "#212529";
 }
