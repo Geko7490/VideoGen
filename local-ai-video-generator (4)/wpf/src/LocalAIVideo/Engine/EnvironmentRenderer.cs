@@ -31,20 +31,20 @@ public static class EnvironmentRenderer
         {
             case EnvType.space:
                 dc.DrawRectangle(Palette.Brush(Palette.Styled(Palette.C("#05060f"), st)), null, new Rect(-W, -H, W * 3, H * 3));
-                var r = new Random(seed);
+                var starsRandom = new Random(seed);
                 for (int i = 0; i < 120; i++)
                 {
                     dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + r.NextDouble() * .75), null,
                         new Point(r.NextDouble() * W * 1.6 - W * .3, r.NextDouble() * H * .62), .4 + r.NextDouble() * 1.6, .4 + r.NextDouble() * 1.6);
                 }
-                var neb = new RadialGradientBrush(Palette.AlphaColor(Palette.C(bible.Primary), .32), Colors.Transparent);
+                var neb = Palette.Radial(Palette.AlphaColor(Palette.C(bible.Primary), .32), Colors.Transparent);
                 dc.DrawRectangle(neb, null, new Rect(-W, -H, W * 3, H * 3));
                 var pg = new RadialGradientBrush(Palette.Styled(Palette.C(bible.Secondary), st), Palette.C("#0b1020")) { GradientOrigin = new Point(-.3, -.3) };
                 dc.DrawEllipse(pg, null, new Point(W * .22, H * .68), W * .26, W * .26);
                 break;
 
             case EnvType.@abstract:
-                var bg = new LinearGradientBrush(Palette.Styled(Palette.C(bible.Sky), st), Palette.Styled(Palette.C(bible.Primary), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 1) };
+                var bg = Palette.Linear(Palette.Styled(Palette.C(bible.Sky), st), Palette.Styled(Palette.C(bible.Primary), st)) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 1) };
                 dc.DrawRectangle(bg, null, new Rect(-W, -H, W * 3, H * 3));
                 var r2 = new Random(seed);
                 for (int i = 0; i < 14; i++)
@@ -65,7 +65,7 @@ public static class EnvironmentRenderer
                 {
                     var (wall, _) = Room.TryGetValue(spec.Environment.Type, out var c) ? c : ("#cbc7bd", "#8a8279");
                     bool night = spec.Environment.Time == TimeOfDay.night;
-                    var wc = Palette.Styled(Palette.C(night ? Palette.Shade(Palette.C(wall), -.5).ToString("#rrggbb") : wall), st);
+                    var wc = Palette.Styled(night ? Palette.Shade(Palette.C(wall), -.5) : Palette.C(wall), st);
                     dc.DrawRectangle(Palette.Brush(wc), null, new Rect(-W, -H, W * 3, H * 3));
                 }
                 else
@@ -77,11 +77,11 @@ public static class EnvironmentRenderer
                     {
                         var r = new Random(seed);
                         for (int i = 0; i < 70; i++)
-                            dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + r.NextDouble() * .7), null, new Point(r.NextDouble() * W * 1.6 - W * .3, r.NextDouble() * H * .6), .4 + r.NextDouble(), .4 + r.NextDouble());
+                            dc.DrawEllipse(Palette.Alpha(Colors.White, .2 + starsRandom.NextDouble() * .7), null, new Point(starsRandom.NextDouble() * W * 1.6 - W * .3, starsRandom.NextDouble() * H * .6), .4 + r.NextDouble(), .4 + r.NextDouble());
                         dc.DrawEllipse(Palette.Alpha(Palette.C("#f2f6ff"), .95), null, new Point(W * .76, H * .16), W * .05, W * .05);
                     }
                     // distant silhouettes
-                    var r = new Random(seed + 3);
+                    var skylineRandom = new Random(seed + 3);
                     if (spec.Environment.Type is EnvType.city or EnvType.street or EnvType.rooftop)
                     {
                         var far = Palette.Brush(Palette.Styled(Palette.C(spec.Environment.Time == TimeOfDay.night ? "#101627" : "#6d7f99"), st));
@@ -90,7 +90,7 @@ public static class EnvironmentRenderer
                         var fig = new PathFigure { StartPoint = new Point(x, H) };
                         while (x < W * 1.6)
                         {
-                            double bw = W * (.05 + r.NextDouble() * .08), bh = H * (.1 + r.NextDouble() * .26);
+                            double bw = W * (.05 + skylineRandom.NextDouble() * .08), bh = H * (.1 + skylineRandom.NextDouble() * .26);
                             fig.Segments.Add(new LineSegment(new Point(x, H - bh), true));
                             fig.Segments.Add(new LineSegment(new Point(x + bw, H - bh), true));
                             x += bw;
@@ -109,7 +109,7 @@ public static class EnvironmentRenderer
         var st = Palette.Style(bible.Style);
         bool night = spec.Environment.Time == TimeOfDay.night;
         double detail = st.Flat ? 1.0 : 1.0;
-        var r = new Random(seed + 11);
+        var rng = new Random(seed + 11);
 
         if (IsIndoor(spec.Environment.Type))
         {
@@ -144,12 +144,12 @@ public static class EnvironmentRenderer
                     double x = -W * .35;
                     while (x < W * 1.45)
                     {
-                        double bw = W * (.15 + r.NextDouble() * .12), bh = H * (.22 + r.NextDouble() * .26);
+                        double bw = W * (.15 + rng.NextDouble() * .12), bh = H * (.22 + rng.NextDouble() * .26);
                         var bcol = Palette.Brush(Palette.Styled(Palette.C(night ? "#1d2436" : "#7d8899"), st));
                         dc.DrawRectangle(bcol, Palette.OutlinePen(st.Outline, 1), new Rect(x, horizon - bh, bw, bh));
                         for (int i = 0; i < 8; i++)
                         {
-                            var lit = night ? Palette.Alpha(Palette.C("#ffd483"), r.NextDouble() > .45 ? .85 : .08) : Palette.Alpha(Palette.C("#cfe4ff"), .5);
+                            var lit = night ? Palette.Alpha(Palette.C("#ffd483"), rng.NextDouble() > .45 ? .85 : .08) : Palette.Alpha(Palette.C("#cfe4ff"), .5);
                             dc.DrawRectangle(lit, null, new Rect(x + bw * (.12 + (i % 3) * .3), horizon - bh + H * (.03 + (i / 3) * .07), bw * .17, H * .038));
                         }
                         x += bw + W * .02;
@@ -162,7 +162,7 @@ public static class EnvironmentRenderer
                     dc.DrawRectangle(ground, null, new Rect(-W, horizon, W * 3, H));
                     int n = spec.Environment.Type == EnvType.forest ? 9 : 4;
                     for (int i = 0; i < n; i++)
-                        Tree(dc, -W * .3 + i / (double)n * W * 1.7 + r.NextDouble() * W * .05, horizon, W * (.1 + r.NextDouble() * .07), st, night);
+                        Tree(dc, -W * .3 + i / (double)n * W * 1.7 + rng.NextDouble() * W * .05, horizon, W * (.1 + rng.NextDouble() * .07), st, night);
                     break;
 
                 case EnvType.beach:
@@ -179,7 +179,7 @@ public static class EnvironmentRenderer
                     {
                         double cx = -W * .2 + i * W * .22;
                         dc.DrawGeometry(Palette.Brush(Palette.Styled(Palette.C("#2b221c"), st)), null,
-                            Tri(cx, -H * .1, cx + W * .035, H * (.16 + r.NextDouble() * .16), cx + W * .07, -H * .1));
+                            Tri(cx, -H * .1, cx + W * .035, H * (.16 + rng.NextDouble() * .16), cx + W * .07, -H * .1));
                     }
                     break;
             }
