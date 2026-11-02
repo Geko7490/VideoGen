@@ -117,5 +117,18 @@ public static class Palette
     /// Alpha'da bir renk (gradient constructor'ları Color bekler).
     public static Color AlphaColor(Color c, double a) => Color.FromArgb(Clamp(a * 255), c.R, c.G, c.B);
     public static Pen Pen(Color c, double w) => new(Brush(c), w) { StartLineCap = PenLineCap.Round, EndLineCap = PenLineCap.Round };
+    public static Pen Pen(Brush brush, double w) => new(brush, w) { StartLineCap = PenLineCap.Round, EndLineCap = PenLineCap.Round };
+    public static RadialGradientBrush Radial(Color center, Color edge) => new(new GradientStopCollection
+    {
+        new GradientStop(center, 0), new GradientStop(edge, 1)
+    });
+    public static LinearGradientBrush Linear(Color start, Color end) => new(new GradientStopCollection
+    {
+        new GradientStop(start, 0), new GradientStop(end, 1)
+    }, new Point(0, 0), new Point(0, 1));
+    public static LinearGradientBrush Linear(Color start, Color middle, Color end) => new(new GradientStopCollection
+    {
+        new GradientStop(start, 0), new GradientStop(middle, .5), new GradientStop(end, 1)
+    }, new Point(0, 0), new Point(1, 0));
     public static Pen? OutlinePen(Color? c, double w) => c == null ? null : Pen(c.Value, Math.Max(0.6, w));
 }
