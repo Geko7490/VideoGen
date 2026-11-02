@@ -68,7 +68,7 @@ public static class EffectsRenderer
             double y = H * (.45 + r.NextDouble() * .5);
             double x = (r.NextDouble() * 1.6 - .3) * W + t * (6 + r.NextDouble() * 18);
             double rad = W * (.22 + r.NextDouble() * .3);
-            var g = new RadialGradientBrush(Palette.AlphaColor(Palette.C("#cdd7e6"), .1 + r.NextDouble() * .13), Colors.Transparent);
+            var g = Palette.Radial(Palette.AlphaColor(Palette.C("#cdd7e6"), .1 + r.NextDouble() * .13), Colors.Transparent);
             dc.DrawEllipse(g, null, new Point(x % (W * 1.8), y), rad, rad);
         }
     }
@@ -185,7 +185,7 @@ public static class EffectsRenderer
             double phase = (t * speed + r.NextDouble()) % 1.4 - .2;
             double x = phase * W * 1.3;
             double wdt = W * (.18 + r.NextDouble() * .22);
-            var g = new LinearGradientBrush(Colors.Transparent, Palette.AlphaColor(Colors.Black, .3 + r.NextDouble() * .2), Colors.Transparent) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 0) };
+            var g = Palette.Linear(Colors.Transparent, Palette.AlphaColor(Colors.Black, .3 + r.NextDouble() * .2), Colors.Transparent) { StartPoint = new Point(0, 0), EndPoint = new Point(1, 0) };
             dc.DrawRectangle(g, null, new Rect(x - wdt, 0, wdt * 2, H));
         }
     }
