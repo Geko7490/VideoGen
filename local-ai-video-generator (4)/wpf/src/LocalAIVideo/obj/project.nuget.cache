@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "71lfHcCUGT0=",
+  "success": true,
+  "projectFilePath": "D:\\Yeni klasör\\local-ai-video-generator (4)\\wpf\\src\\LocalAIVideo\\LocalAIVideo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gokme\\.nuget\\packages\\system.speech\\8.0.0\\system.speech.8.0.0.nupkg.sha512",
+    "C:\\Users\\Gokme\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.32\\microsoft.netcore.app.ref.8.0.32.nupkg.sha512",
+    "C:\\Users\\Gokme\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.32\\microsoft.windowsdesktop.app.ref.8.0.32.nupkg.sha512",
+    "C:\\Users\\Gokme\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.32\\microsoft.aspnetcore.app.ref.8.0.32.nupkg.sha512",
+    "C:\\Users\\Gokme\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.32\\microsoft.netcore.app.host.win-x64.8.0.32.nupkg.sha512"
+  ],
+  "logs": []
+}

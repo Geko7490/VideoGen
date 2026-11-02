@@ -1,0 +1,11 @@
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\LocalAIVideo.csproj.AssemblyReference.cache
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\MainWindow.baml
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\App.baml
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\MainWindow.g.cs
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\App.g.cs
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\LocalAIVideo_MarkupCompile.cache
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\LocalAIVideo.g.resources
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\LocalAIVideo.GeneratedMSBuildEditorConfig.editorconfig
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\LocalAIVideo.AssemblyInfoInputs.cache
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\LocalAIVideo.AssemblyInfo.cs
+D:\Yeni klasör\local-ai-video-generator (4)\wpf\src\LocalAIVideo\obj\Release\net8.0-windows\LocalAIVideo.csproj.CoreCompileInputs.cache
