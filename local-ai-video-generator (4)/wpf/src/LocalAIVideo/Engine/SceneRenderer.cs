@@ -64,7 +64,7 @@ public static class SceneRenderer
             {
                 ObjPos.foreground => H * 1.0,
                 ObjPos.background => horizon - H * .05,
-                EnvironmentRenderer.IsIndoor(spec.Environment.Type) && EnvironmentRenderer.IsWall(ob.Type) => horizon - H * .26,
+                _ when EnvironmentRenderer.IsIndoor(spec.Environment.Type) && EnvironmentRenderer.IsWall(ob.Type) => horizon - H * .26,
                 _ => horizon,
             };
             double size = W * .15 * ob.Scale * (ob.Position == ObjPos.foreground ? 1.7 : ob.Position == ObjPos.background ? .6 : 1);
