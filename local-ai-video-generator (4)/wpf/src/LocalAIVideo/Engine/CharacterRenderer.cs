@@ -246,7 +246,7 @@ public static class CharacterRenderer
     }
 
     // Approximate an outline by drawing the same path with a thicker pen (cheap & effective).
-    private static PathGeometry ShiftGrow(PathGeometry g, double, Point, Point) => g;
+    private static PathGeometry ShiftGrow(PathGeometry g, double _amount, Point _start, Point _end) => g;
 
     private static void Shoe(DrawingContext dc, Point p, Color color, double U, Pen? pen)
         => dc.DrawEllipse(Palette.Brush(color), pen, new Point(p.X + U * .012, p.Y), U * .034, U * .017);
