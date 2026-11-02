@@ -25,7 +25,7 @@ public static class CharacterRenderer
             case CharacterKind.animal: DrawAnimal(dc, cin, def, t, pos, height, st, seed); break;
             case CharacterKind.robot: DrawRobot(dc, cin, def, t, pos, height, st, seed); break;
             case CharacterKind.shadow: DrawShadow(dc, cin, t, pos, height); break;
-            case CharacterKind.abstract: DrawAbstract(dc, cin, def, t, pos, height, st); break;
+            case CharacterKind.@abstract: DrawAbstract(dc, cin, def, t, pos, height, st); break;
             default: DrawHuman(dc, cin, def, t, pos, height, st, rim, rimAlpha, seed, rand); break;
         }
     }
