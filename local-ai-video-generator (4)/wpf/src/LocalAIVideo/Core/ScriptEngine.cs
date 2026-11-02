@@ -124,7 +124,6 @@ Return ONLY JSON of this shape:
       "transition": "crossfade|fade|fade_black|blur|cut"
     }
   ]
-    public void Dispose() => _http.Dispose();
 }
 """;
     }
@@ -300,4 +299,5 @@ Return ONLY JSON of this shape:
         if (t.Contains("excite") || t.Contains("amaz")) return Emotion.excited;
         return Emotion.neutral;
     }
+    public void Dispose() => _http.Dispose();
 }
